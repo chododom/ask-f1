@@ -1,0 +1,23 @@
+_default:
+    just --list
+
+### Variables ###
+
+NAME := "backend"
+
+### Recipes ###
+
+run-local:
+    uvicorn backend.main:app --host 0.0.0.0 --port 8080 --reload
+
+ask question host="http://localhost:8080":
+    curl -X POST \
+        -H 'Content-Type: application/json' \
+        -d '{"query": "{{question}}", "session_id": "746c4df8-a68f-4c16-bda1-28f4a45716b7"}' \
+        {{host}}/chat
+
+fix:
+    uv run ruff check --fix backend
+
+format:
+    uv run ruff format backend
