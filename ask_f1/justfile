@@ -1,0 +1,27 @@
+_default:
+    just --list
+
+### Variables ###
+
+NAME := "ask-f1"
+
+### Recipes ###
+
+run:
+    uvicorn ask_f1.main:app --host 0.0.0.0 --port 8080 --reload
+
+ask question host="http://localhost:8080":
+    curl -X POST \
+        -H 'Content-Type: application/json' \
+        -d '{"query": "{{question}}", "session_id": "746c4df8-a68f-4c16-bda1-28f4a45716b7"}' \
+        {{host}}/v1/chat/completions
+
+list-models host="http://localhost:8080":
+    curl -X GET \
+        {{host}}/v1/models
+
+fix:
+    uv run ruff check --fix ask_f1
+
+format:
+    uv run ruff format ask_f1
