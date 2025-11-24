@@ -11,8 +11,6 @@ services:
     build: src/ask_f1_agent/
     ports:
       - "8080:8080"
-    env_file:
-      - .env
     environment:
       - MCP_URL=http://f1-mcp-server:8000/mcp
     restart: always

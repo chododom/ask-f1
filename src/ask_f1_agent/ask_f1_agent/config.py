@@ -15,7 +15,7 @@ class Config(BaseSettings):
     sys_prompt_path: str = "prompts/system_prompt.txt"
 
     # ChromaDB settings
-    chroma_persistence_dir: str = "chroma_db"
+    chroma_persistence_dir: str = "chroma_db"  # in relation to ask_f1_agent root
     chroma_collection_name: str = "rag_documents"
 
     mcp_url: str = "http://localhost:8000/mcp"

@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
     logger.info("Starting up...")
 
     chroma_db.CHROMA_SERVICE_INSTANCE = chroma_db.ChromaDBService(
-        persist_directory=get_package_root(CFG.package_name) / CFG.chroma_persistence_dir
+        persist_directory=get_package_root(CFG.package_name).parent / CFG.chroma_persistence_dir
     )
 
     await mcp_manager.connect()
