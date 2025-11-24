@@ -48,6 +48,8 @@ You may use `direnv` to setup automatic environment activation and export of env
 
 ## Getting started
 
+> **_NOTE:_**  The current setup uses `Gemini` as the LLM, so the user must be authenticated using `gcloud` to a `Google Cloud` project.
+
 First, run the F1 MCP server:
 ```
 cd src/f1_mcp
