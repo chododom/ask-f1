@@ -1,0 +1,15 @@
+services:
+  ask-f1-agent:
+    volumes:
+      - <local gcloud folder>:/root/.config/gcloud:ro
+      - <local chroma db folder>:/app/chroma_db
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
+      - GOOGLE_CLOUD_PROJECT=<gcp project id>
+      - LANGSMITH_TRACING=true
+      - LANGSMITH_API_KEY=<langsmith api key>
+      - LANGSMITH_ENDPOINT=https://eu.api.smith.langchain.com
+      - LANGSMITH_PROJECT=<langsmith project name>
+
+volumes:
+  <local chroma db folder>:
