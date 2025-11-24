@@ -1,6 +1,8 @@
-from pydantic import BaseModel
-from typing import List
 import time
+
+from typing import List
+
+from pydantic import BaseModel
 
 
 class ModelCard(BaseModel):

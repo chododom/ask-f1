@@ -1,12 +1,23 @@
 services:
+  # F1 MCP server
+  f1-mcp-server:
+    build: src/f1_mcp/
+    ports:
+      - "8000:8000"
+    restart: always
+
   # Agent backend
-  ask-f1:
-    build: ask_f1/
+  ask-f1-agent:
+    build: src/ask_f1_agent/
     ports:
       - "8080:8080"
     env_file:
       - .env
+    environment:
+      - MCP_URL=http://f1-mcp-server:8000/mcp
     restart: always
+    depends_on:
+      - f1-mcp-server
 
   # OpenWebUI frontend
   open-webui:
@@ -16,12 +27,12 @@ services:
     volumes:
       - .open-webui:/app/backend/data # Persist chat history
     environment:
-      - OPENAI_API_BASE_URL=http://ask-f1:8080/v1 # point OpenWebUI to backend server
+      - OPENAI_API_BASE_URL=http://ask-f1-agent:8080/v1 # point OpenWebUI to backend server
       - OPENAI_API_KEY=no-key-needed
       - ENABLE_FOLLOW_UP_GENERATION=False
-    depends_on:
-      - ask-f1
     restart: always
+    depends_on:
+      - ask-f1-agent
 
 volumes:
   .open-webui:

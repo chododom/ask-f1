@@ -14,3 +14,4 @@ wheels/
 data/
 .open-webui/
 .DS_Store
+docker-compose.override.yml

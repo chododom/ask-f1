@@ -9,10 +9,10 @@ WORKDIR /app
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml ./
 COPY . .
 
-RUN uv sync --frozen --no-install-project
+RUN uv sync --no-install-project
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["uvicorn", "ask_f1.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "ask_f1_agent.main:app", "--host", "0.0.0.0", "--port", "8080"]

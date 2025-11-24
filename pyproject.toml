@@ -1,0 +1,45 @@
+[project]
+name = "ask-f1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-chroma>=1.0.0",
+    "langchain-community>=0.4.1",
+    "langchain-google-vertexai>=3.0.3",
+    "pypdf>=6.3.0",
+    "sentence-transformers>=5.1.2",
+]
+
+[tool.uv.workspace]
+members = [
+    "src/ask_f1_agent",
+    "src/f1_mcp",
+]
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pre-commit",
+    "ruff",
+]
+
+# Ruff
+
+[tool.ruff]
+line-length = 119  # Enforces a maximum line length of 119 characters.
+target-version = "py312"  # Sets the target Python version to 3.12.
+
+[tool.ruff.lint]
+extend-select = [
+    # import sorting - Enables import sorting rules (isort).
+    "I"
+]
+
+[tool.ruff.lint.isort]
+lines-between-types = 1  # Enforces one blank line between import types (e.g., standard library, third-party, local).
+
+[tool.ruff.format]
+quote-style = "double"
+line-ending = "lf"

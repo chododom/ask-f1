@@ -1,9 +1,10 @@
-from ask_f1.utils.logger import logger
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+from ask_f1_agent.utils.logger import logger
 
 
 class Config(BaseSettings):
-    package_name: str = "backend"
+    package_name: str = "ask_f1_agent"
     log_level: str = "INFO"
 
     # LLM settings
@@ -14,8 +15,10 @@ class Config(BaseSettings):
     sys_prompt_path: str = "prompts/system_prompt.txt"
 
     # ChromaDB settings
-    #chroma_persistence_dir: str = "chroma_db"
-    #chroma_collection_name: str = "rag_documents"
+    chroma_persistence_dir: str = "chroma_db"
+    chroma_collection_name: str = "rag_documents"
+
+    mcp_url: str = "http://localhost:8000/mcp"
 
     model_config = SettingsConfigDict(env_file=".env")
 
